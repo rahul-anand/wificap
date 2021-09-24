@@ -17,6 +17,8 @@ def method_filter_HTTP(pkt):
     cur_dict['mac_1']  =pkt.addr1
     cur_dict['mac_2']  =pkt.addr2
     cur_dict['rssi'] = pkt.dBm_AntSignal
+    cur_dict['pkt_time'] = pkt.time
+
     # print(cur_dict)
 
 
@@ -26,7 +28,7 @@ def method_filter_HTTP(pkt):
         file_object = open('rssi.txt', 'a')
         print(cur_dict,"\t Missed:",missed_count)
         try:
-            to_write=cur_dict['mac_1']+","+cur_dict['mac_2']+","+str(cur_dict['rssi'])+"\n"
+            to_write=str(cur_dict['pkt_time'])+","+cur_dict['mac_1']+","+cur_dict['mac_2']+","+str(cur_dict['rssi'])+"\n"
             file_object.write(to_write)
             file_object.close(  )
         except Exception as e:
